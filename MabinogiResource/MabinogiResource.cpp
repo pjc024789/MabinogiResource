@@ -1,4 +1,4 @@
-// MabinogiResource.cpp : ¶¨Òå DLL Ó¦ÓÃ³ÌĞòµÄµ¼³öº¯Êı¡£
+// MabinogiResource.cpp : å®šä¹‰ DLL åº”ç”¨ç¨‹åºçš„å¯¼å‡ºå‡½æ•°ã€‚
 //
 
 #include "stdafx.h"
@@ -53,7 +53,7 @@ public:
 
 	}
 
-	// ¿ªÊ¼Ò»¸ö×÷Òµ
+	// å¼€å§‹ä¸€ä¸ªä½œä¸š
 	virtual void BeginWork(LPCTSTR lpszName, int totalWork )
 	{
 		if (m_pfnProc == NULL)
@@ -68,7 +68,7 @@ public:
 		SetCanceled(!m_pfnProc(&data));
 	}
 
-	// Ôö¼Ó×÷Òµ²½½ø
+	// å¢åŠ ä½œä¸šæ­¥è¿›
 	virtual void Worked(int work)
 	{
 		if (m_pfnProc == NULL)
@@ -82,7 +82,7 @@ public:
 		SetCanceled(!m_pfnProc(&data));
 	}
 
-	// ½áÊø×÷Òµ
+	// ç»“æŸä½œä¸š
 	virtual void Done()
 	{
 		if (m_pfnProc == NULL)
@@ -95,7 +95,7 @@ public:
 		SetCanceled( !m_pfnProc(&data));
 	}
 
-	// ÉèÖÃµ±Ç°×÷ÒµµÄÃû³Æ
+	// è®¾ç½®å½“å‰ä½œä¸šçš„åç§°
 	virtual void SetTaskName(LPCTSTR name)
 	{
 		if (m_pfnProc == NULL)
@@ -109,7 +109,7 @@ public:
 		SetCanceled( !m_pfnProc(&data));
 	}
 
-	// ÉèÖÃµ±Ç°×÷ÒµµÄ¸±×÷ÒµÃû³Æ
+	// è®¾ç½®å½“å‰ä½œä¸šçš„å‰¯ä½œä¸šåç§°
 	virtual void SetSubTaskName(LPCTSTR lpszName)
 	{
 		if (m_pfnProc == NULL)
@@ -123,13 +123,13 @@ public:
 		SetCanceled( !m_pfnProc(&data));
 	}
 
-	// ·µ»Øµ±Ç°×÷ÒµÊÇ·ñÕıÔÚÈ¡ÏûÖĞ
+	// è¿”å›å½“å‰ä½œä¸šæ˜¯å¦æ­£åœ¨å–æ¶ˆä¸­
 	virtual bool IsCanceled()
 	{
 		return m_bCanceled;
 	}
 
-	// ÉèÖÃµ±Ç°×÷ÒµÊÇ·ñÈ¡Ïû
+	// è®¾ç½®å½“å‰ä½œä¸šæ˜¯å¦å–æ¶ˆ
 	virtual void SetCanceled(bool value)
 	{
 		if (m_bCanceled != value)
@@ -170,7 +170,7 @@ MABINOGIRESOURCE_API PACK_RESOURCE_SET_HANDLE CreateResourceSetFromFile( LPCTSTR
 
 MABINOGIRESOURCE_API void CloseResourceSet( PACK_RESOURCE_SET_HANDLE hResourceSet )
 {
-	delete hResourceSet;
+	delete ((SReourceSet*)hResourceSet);
 }
 
 MABINOGIRESOURCE_API int ResourceSet_FindResourceIndex( PACK_RESOURCE_SET_HANDLE hResourceSet, LPCTSTR lpszName )
@@ -194,7 +194,7 @@ MABINOGIRESOURCE_API size_t ResourceSet_GetResourceCount( PACK_RESOURCE_SET_HAND
 
 MABINOGIRESOURCE_API void CloseResource( PACK_RESOURCE_HANDLE hResource )
 {
-	delete hResource;
+	delete ((SResource*)hResource);
 }
 
 //MABINOGIRESOURCE_API LPCSTR GetName( PACK_RESOURCE_HANDLE hResource )
